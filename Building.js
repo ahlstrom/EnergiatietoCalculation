@@ -3,7 +3,7 @@ function Building() {
 	// User given parameters
 	this.name = "Koetalo";
 	this.floorArea = 240; 									// square meters
-	this.buildingType = "2"; 								// 1:"Asuinrakennus - erillistalo" 2:"Asuinrakennus - uudisrakennus"
+	this.buildingType = "1"; 								// 1:"Asuinrakennus - erillistalo" 2:"Asuinrakennus - uudisrakennus"
 	this.buildingYear = 2015;
 	this.numberOfInhabitants = 3;
 

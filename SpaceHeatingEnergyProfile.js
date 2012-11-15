@@ -42,22 +42,22 @@ function SpaceHeatingEnergyProfile( building, constants ) {
 		}
 	}
 	if ( building.buildingType == "2" ) { // "Asuinrakennus - uudisrakennus"
-		if (building.buildingYear = 2014 ) {
+		if (building.buildingYear == 2014 ) {
 			for(hour=0;hour<8760;hour++) {
 				profile.profile[hour] = constants.simulatedSpaceHeatingDemandOfResidentialReferenceBuilding2014[hour] * building.floorArea;
 			}
 		}	
-		if (building.buildingYear = 2015 ) {
+		if (building.buildingYear == 2015 ) {
 			for(hour=0;hour<8760;hour++) {
 				profile.profile[hour] = constants.simulatedSpaceHeatingDemandOfResidentialReferenceBuilding2015[hour] * building.floorArea;
 			}
 		}	
-		if (building.buildingYear = 2016 ) {
+		if (building.buildingYear == 2016 ) {
 			for(hour=0;hour<8760;hour++) {
 				profile.profile[hour] = constants.simulatedSpaceHeatingDemandOfResidentialReferenceBuilding2016[hour] * building.floorArea;
 			}
 		}	
-		if (building.buildingYear = 2017 ) {
+		if (building.buildingYear == 2017 ) {
 			for(hour=0;hour<8760;hour++) {
 				profile.profile[hour] = constants.simulatedSpaceHeatingDemandOfResidentialReferenceBuilding2017[hour] * building.floorArea;
 			}
