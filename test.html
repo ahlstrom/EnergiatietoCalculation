@@ -5,6 +5,9 @@
 
 		<script src="Profiles/heatingDemandProfileHelsinkiKaisaniemiReferenceYear.js"></script>
 		<script src="Profiles/simulatedSpaceHeatingDemandOfResidentialReferenceBuilding2014.js"></script>
+		<script src="Profiles/simulatedSpaceHeatingDemandOfResidentialReferenceBuilding2015.js"></script>
+		<script src="Profiles/simulatedSpaceHeatingDemandOfResidentialReferenceBuilding2016.js"></script>
+		<script src="Profiles/simulatedSpaceHeatingDemandOfResidentialReferenceBuilding2017.js"></script>
 
 		
 		<script src="Profile.js"></script>
@@ -22,12 +25,41 @@
 
 			function run() {
 
+
 				var building = new Building();
 				var constants = new Constants();
+				var profile;
 
-				document.getElementById("output").innerHTML = SpaceHeatingEnergyProfile( building, constants ).period(2011,1,2011,12);
-				//profilePrinter( SpaceHeatingEnergyProfile( building, constants ), "output" );
+				var selectorProfile = document.getElementById("selectorProfile");
+				var selectorView= document.getElementById("selectorView");
 
+				if( selectorProfile.value == "1" ) {
+					profile = HotWaterHeatingEnergyProfile( building, constants);
+				}
+				if ( selectorView.value == "Hours" ) {
+					profilePrinter( profile, "output");
+				}
+				if ( selectorView.value == "Days" ) {
+					var day;
+					var outputHTML = "";
+					for(day=1;day<=365;day++) {
+						outputHTML += profile.day(day) + "<br>";
+					}
+					document.getElementById("output").innerHTML = outputHTML;
+				}
+				if ( selectorView.value == "Months" ) {
+					var month;
+					var outputHTML = "";
+					for(month=1;month<=12;month++) {
+						outputHTML += profile.month(month) + "<br>";
+					}
+					document.getElementById("output").innerHTML = outputHTML;
+				}
+				if ( selectorView.value == "Year" ) {
+					document.getElementById("output").innerHTML = profile.year();
+				}
+
+				
 			}
 
 
@@ -35,7 +67,31 @@
 
 	</head>
 
-	<body onload="run()">
+	<body>
+
+		<div id="input">
+			<form>
+				Profile:
+				<select id="selectorProfile" onchange="run()">
+					<option value="">Choose</option>
+					<option value="1">Building hot water heating energy</option>
+					<option value="2">2015</option>
+					<option value="3">2016</option>
+					<option value="4">2017</option>
+				</select>
+				<br>
+			</form>
+			<form>
+				View:
+				<select id="selectorView" onchange="run()">
+					<option value="Hours">Hours</option>
+					<option value="Days">Days</option>
+					<option value="Months">Months</option>
+					<option value="Year">Year</option>
+				</select>
+				<br>
+			</form>			
+		</div>
 
 		<div id="output"></div>
 
