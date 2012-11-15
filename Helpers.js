@@ -33,10 +33,20 @@ function BuildingDataPrinter(building, outputTarget) {
 function BuildingDataSraper(building) {
 	var key;
 	var element;
+	var elementValue;
 	for ( key in building ) {
 		if ( building.hasOwnProperty(key) ) {
 			element = document.getElementById(key);
-			building[key] = element.value;
+			switch ( element.value ) {
+				case "true":
+					building[key] = true; 
+					break;
+				case "false":
+					building[key] = false; 
+					break;
+				default:
+					building[key] = element.value;
+			}			
 		}
 	}
 }
@@ -52,6 +62,7 @@ function Initialize() {
 
 function Update() {
 	BuildingDataSraper(building);
+	document.getElementById("debug").innerHTML = "";
 	Run();
 	BuildingDataPrinter(building, "buildingData");
 }
