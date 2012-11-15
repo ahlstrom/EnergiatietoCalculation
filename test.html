@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+
+		<script src="Profiles/heatingDemandProfileHelsinkiKaisaniemiReferenceYear.js"></script>
+		<script src="Profiles/simulatedSpaceHeatingDemandOfResidentialReferenceBuilding2014.js"></script>
+
+		
+		<script src="Profile.js"></script>
+
+		<script src="Building.js"></script>
+		<script src="Constants.js"></script>		
+
+		<script src="HotWaterHeatingEnergyProfile.js"></script>
+		<script src="SpaceHeatingEnergyProfile.js"></script>
+
+		<script src="Helpers.js"></script>
+
+			
+		<script>
+
+			function run() {
+
+				var building = new Building();
+				var constants = new Constants();
+
+				document.getElementById("output").innerHTML = SpaceHeatingEnergyProfile( building, constants ).period(2011,1,2011,12);
+				//profilePrinter( SpaceHeatingEnergyProfile( building, constants ), "output" );
+
+			}
+
+
+		</script>
+
+	</head>
+
+	<body onload="run()">
+
+		<div id="output"></div>
+
+	</body>
+</html>
