@@ -12,20 +12,21 @@ function Building() {
 	this.electricityConsumpitonEstimated = false;
 
 	this.oilConsumption = 5000;								// liters
-	this.districtHeatingConsumption;						// kWh
+	this.districtHeatingConsumption = 5000;						// kWh
 	this.energyConsumptionPeriodStartYear = 2010;
 	this.energyConsumptionPeriodStartMonth = 9;
 	this.energyConsumptionPeriodEndYear = 2011;
 	this.energyConsumptionPeriodEndMonth = 3;
 	this.energyConsumptionIncludesWaterHeating = true;
 
-	this.electricityConsumption;							// kWh
-	this.electricityConsumptionPeriodStartYear;
-	this.electricityConsumptionPeriodStartMonth;
-	this.electricityConsumptionPeriodEndYear;
-	this.electricityConsumptionPeriodEndMonth;
+	this.electricityConsumption = 0;							// kWh
+	this.electricityConsumptionPeriodStartYear = 2010;
+	this.electricityConsumptionPeriodStartMonth = 1;
+	this.electricityConsumptionPeriodEndYear = 2010;
+	this.electricityConsumptionPeriodEndMonth = 12;
 
-	// Building specific default values. User can view and change if necessary.
+	// Building specific default values.
+	// User can view and change if necessary.
 	this.averageRoomHeight = 2.8;							// meters
 	this.waterConsumptionPerPersonPerDay = 60;				// liters/(person day)
 

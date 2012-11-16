@@ -1,5 +1,4 @@
 function ElectricityConsumptionProfile( building, constants ) {
-	
 	var profile = new Profile();
 	var hour;
 	if(building.buildingType == "1" || building.buildingType == "2") {

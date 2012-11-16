@@ -73,15 +73,20 @@ function Run() {
     var profile;
 
     var selectorProfile = document.getElementById("selectorProfile");
-    var selectorView= document.getElementById("selectorView");
+    var selectorView = document.getElementById("selectorView");
 
-    if( selectorProfile.value == "1" ) {
-        profile = HotWaterHeatingEnergyProfile( building, constants);
+    switch ( selectorProfile.value ) {
+    	case "1":
+    		profile = HotWaterHeatingEnergyProfile( building, constants);
+    		break;
+    	case "2":
+    		profile = SpaceHeatingEnergyProfile( building, constants);
+    		break;
+    	case "3":
+    		profile = ElectricityConsumptionProfile( building, constants);
+    		break;
     }
 
-     if( selectorProfile.value == "2" ) {
-        profile = SpaceHeatingEnergyProfile( building, constants);
-    }
 
     if ( selectorView.value == "Hours" ) {
         ProfilePrinter( profile, "output");

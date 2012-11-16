@@ -1,36 +1,32 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
-        <title>Energiatieto Calculations</title>
 
+        <title>Energiatieto Calculations</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         
         <link href="css/layout.css" rel="stylesheet" type="text/css" />
+        <script src="TestBench.js"></script>
 
         <script src="Profiles/heatingDemandProfileHelsinkiKaisaniemiReferenceYear.js"></script>
         <script src="Profiles/simulatedSpaceHeatingDemandOfResidentialReferenceBuilding2014.js"></script>
         <script src="Profiles/simulatedSpaceHeatingDemandOfResidentialReferenceBuilding2015.js"></script>
         <script src="Profiles/simulatedSpaceHeatingDemandOfResidentialReferenceBuilding2016.js"></script>
         <script src="Profiles/simulatedSpaceHeatingDemandOfResidentialReferenceBuilding2017.js"></script>
-
-        
+    
         <script src="Profile.js"></script>
-
+        <script src="Constants.js"></script>         
         <script src="Building.js"></script>
-        <script src="Constants.js"></script>        
-
+        <script src="SolarPanel.js"></script>
+         
         <script src="HotWaterHeatingEnergyProfile.js"></script>
         <script src="SpaceHeatingEnergyProfile.js"></script>
-
-        <script src="Helpers.js"></script>
-
-            
+        <script src ="ElectricityConsumptionProfile.js"></script>
 
 
     </head>
 
     <body onload="Initialize();">
-
         <div class="containerMaster">
             <div class="containerWide">
         		<div class="header"></div>
@@ -47,8 +43,9 @@
                                 Profile:
                                 <select id="selectorProfile" onchange="Update()">
                                     <option value="">Choose</option>
-                                    <option value="1">Building hot water heating energy</option>
-                                    <option value="2">Space heating energy profile</option>
+                                    <option value="1">Building - Hot water heating energy</option>
+                                    <option value="2">Building - Space heating energy</option>
+                                    <option value="3">Building - Electricity consumption</option>
                                 </select>
                                 <br>
                             </form>
@@ -77,7 +74,6 @@
                 </div>
         	</div>
         </div>
-
     </body>
 
 </html>
