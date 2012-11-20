@@ -26,9 +26,9 @@ function ElectricityConsumptionDistributionProfile( building, constants ) {
 	hourOfYear=0;
 	sum=0.0;
 	for (day=0;day<365;day++) {	
-		weekValue = constants.domesticElectricityConsumptionWeekValues [ constants.referenceYearCalendar[day][2] - 1 ];
-		dayType = constants.referenceYearCalendar[day][4] - 1;
-		if( constants.referenceYearCalendar[day][0] == 12 || constants.referenceYearCalendar[day][0] == 1 || constants.referenceYearCalendar[day][0] == 2 ) {
+		weekValue = constants.domesticElectricityConsumptionWeekValues [ constants.referenceYearCalendar.week[day] - 1 ];
+		dayType = constants.referenceYearCalendar.dayType[day] - 1;
+		if( constants.referenceYearCalendar.month[day] == 12 || constants.referenceYearCalendar.month[day] == 1 || constants.referenceYearCalendar.month[day] == 2 ) {
 			season = 1;
 		} else {
 			season = 0;
