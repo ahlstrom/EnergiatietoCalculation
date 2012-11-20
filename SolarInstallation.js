@@ -1,4 +1,4 @@
-function SolarPanel {
+function SolarInstallation {
 
 	this.photovoltaicArea = 20;								// m2
 	this.thermalArea = 0;

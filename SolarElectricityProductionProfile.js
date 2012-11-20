@@ -1,4 +1,4 @@
-function SolarElectricityProductionProfile( SolarPanel, constants ) {
+function SolarElectricityProductionProfile( solarInstallation, constants ) {
 	
 	var profile = new Profile();
 	var hour;
@@ -28,7 +28,9 @@ function SolarElectricityProductionProfile( SolarPanel, constants ) {
 	 säteilymäärä = f( A , sätelyjakauma )
 }
 
-	totalElectricityProduction = solarPanel.photovoltaicArea * solarPanel.photovoltaicPeakPowerFactor * solarPanel.photovoltaicInstallationFactor
+	InstallationAreaAvgIrradiance(SolarInstallation,constants) * solarInstallation.photovoltaicArea * solarInstallation.photovoltaicPeakPowerFactor * solarIstallation.photovoltaicInstallationFactor;
+
+	totalElectricityProduction = solarPanel.photovoltaicArea * 
 
 		for(hour=0;hour<8760;hour++) {
 			profile.profile[hour] = 
@@ -37,26 +39,27 @@ function SolarElectricityProductionProfile( SolarPanel, constants ) {
 	return profile;
 }
 
-function PanelAreaTotalIrradiance ( SolarPanel, constants ) {
+function InstallationAreaAvgIrradiance( solarInstallation, constants ) {
 
-	var panelAreaOnGoodRoofArea;
-	var panelAreaOnRemainingRoofArea;
+	var installationAreaOnGoodRoofArea;
+	var installationAreaOnRemainingRoofArea;
 	var roofRemainingAreaAvgIrradiance;
-	var PanelAreaTotalIrradiance;
+	var installationAreaTotalIrradiance;
+	var installationTotalArea = solarInstallation.photovoltaicArea + solarInstallation.thermalArea;
 
-	if( solarPanel.photovoltaicArea <= solarPanel.roofGoodArea ) {
-		panelAreaOnGoodRoofArea = solarPanel.photovoltaicArea;
-		panelAreaOnRemainingRoofArea = 0;
+
+	if( installationTotalArea <= solarInstallation.roofGoodArea ) {
+		installationAreaOnGoodRoofArea = installationTotalArea
+		installationAreaOnRemainingRoofArea = 0;
 	} else {
-		panelAreaOnGoodRoofArea = solarPanel.roofGoodArea;
-		panelAreaOnRemainingRoofArea = solarPanel.photovoltaicArea - panelAreaOnGoodRoofAre;
+		installationAreaOnGoodRoofArea = solarInstallation.roofGoodArea;
+		installationAreaOnRemainingRoofArea = installationTotalArea - installationAreaOnGoodRoofArea;
 	}
 
-	roofRemainingAreaAvgRadiation = ( solarPanel.roofAreaTotalRadiation - ( solarPanel.roofGoodArea * solarPanel.roofGoodAreaAvgRadiation ) ) / ( solarPanel.roofArea - solarPanel.roofGoodArea );
+	roofRemainingAreaAvgIrradiance = ( solarInstallation.roofAreaTotalIrradiance - solarInstallation.roofGoodAreaTotalIrradiance ) / ( solarInstallation.roofArea - solarInstallation.roofGoodArea );
 
-	irradiation = panelAreaOnGoodRoofArea * solarPanel.roofGoodAreaAvgRadiation;
-	irradiation += panelAreaOnRemainingRoofArea * roofRemainingAreaAvgRadiation;
+	installationAreaTotalIrradiance = installationAreaOnGoodRoofArea * solarInstallation.roofGoodAreaAvgRadiation;
+	installationAreaTotalIrradiance += installationAreaOnRemainingRoofArea * roofRemainingAreaAvgIrradiance;
 
-	return irradiation;
-
+	return installationAreaTotalIrradiance / installationTotalArea;
 }

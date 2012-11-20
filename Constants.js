@@ -9,4 +9,7 @@ function Constants() {
 	this.simulatedSpaceHeatingDemandOfResidentialReferenceBuilding2015 = simulatedSpaceHeatingDemandOfResidentialReferenceBuilding2015;
 	this.simulatedSpaceHeatingDemandOfResidentialReferenceBuilding2016 = simulatedSpaceHeatingDemandOfResidentialReferenceBuilding2016;
 	this.simulatedSpaceHeatingDemandOfResidentialReferenceBuilding2017 = simulatedSpaceHeatingDemandOfResidentialReferenceBuilding2017;
+	this.referenceYearCalendar = referenceYearCalendar;
+	this.domesticElectricityConsumptionWeekValues = domesticElectricityConsumptionWeekValues;
+	this.domesticElectricityConsumptionHourValues = domesticElectricityConsumptionHourValues;
 }

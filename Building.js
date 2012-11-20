@@ -35,5 +35,5 @@ function Building() {
 	this.waterHeatingTemperatureDifference = 50;			// Kelvin or Celsius
 	this.waterHeatingLosses = 0.89;
 
-	this.nominalElectricityConsumption = 20;				// kWh/(m3 year)
+	this.nominalElectricityConsumption = 58;				// kWh/(m2 year)
 }

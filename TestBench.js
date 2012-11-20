@@ -52,11 +52,9 @@ function BuildingDataSraper(building) {
 }
 
 function Initialize() {
-
 	building = new Building(); 		// global
     constants = new Constants();	// global
-
-    BuildingDataPrinter(building, "buildingData");
+    BuildingDataPrinter(building, "buildingData");   
 }
 
 
