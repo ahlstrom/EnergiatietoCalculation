@@ -14,9 +14,9 @@ function Building() {
 	this.oilConsumption = 5000;								// liters
 	this.districtHeatingConsumption = 5000;						// kWh
 	this.energyConsumptionPeriodStartYear = 2010;
-	this.energyConsumptionPeriodStartMonth = 9;
-	this.energyConsumptionPeriodEndYear = 2011;
-	this.energyConsumptionPeriodEndMonth = 3;
+	this.energyConsumptionPeriodStartMonth = 2;
+	this.energyConsumptionPeriodEndYear = 2010;
+	this.energyConsumptionPeriodEndMonth = 12;
 	this.energyConsumptionIncludesWaterHeating = true;
 
 	this.electricityConsumption = 0;							// kWh

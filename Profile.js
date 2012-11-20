@@ -53,10 +53,10 @@ function Profile() {
 
 	this.period = period;
 	function period(periodStartYear, periodStartMonth, periodEndYear, periodEndMonth) {
-	var year = periodStartYear;
-	var month = periodStartMonth;
-	var sum = 0.0;
-		while( year <= periodEndYear && ( year < periodEndYear || month <= periodEndMonth) ) {
+		var year = periodStartYear;
+		var month = periodStartMonth;
+		var sum = 0.0;
+		while( +year <= +periodEndYear && ( (+year < +periodEndYear) || (+month <= +periodEndMonth) ) ) {
 			sum += this.month(month);
 			month++;
 			if( month > 12 ) {

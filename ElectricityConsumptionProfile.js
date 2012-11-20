@@ -22,7 +22,6 @@ function ElectricityConsumptionDistributionProfile( building, constants ) {
 	var hourOfYear;
 	var sum;
 	var profile = new Profile();
-
 	hourOfYear=0;
 	sum=0.0;
 	for (day=0;day<365;day++) {	
