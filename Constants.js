@@ -8,6 +8,7 @@ function Constants() {
 	this.simulatedSpaceHeatingDemandOfResidentialReferenceBuildingFrom2013To2014 = simulatedSpaceHeatingDemandOfResidentialReferenceBuildingFrom2013To2014;
 	this.simulatedSpaceHeatingDemandOfResidentialReferenceBuildingFrom2015To2017 = simulatedSpaceHeatingDemandOfResidentialReferenceBuildingFrom2015To2017;
 	this.referenceYearCalendar = new ReferenceYearCalendar();
+	this.daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 	this.domesticElectricityConsumptionWeekValues = domesticElectricityConsumptionWeekValues;
 	this.domesticElectricityConsumptionHourValues = domesticElectricityConsumptionHourValues;
 	this.vantaaReferenceYearTotalIrradiationOnHorizontalSurface = vantaaReferenceYearTotalIrradiationOnHorizontalSurface;

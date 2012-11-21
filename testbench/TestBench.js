@@ -130,6 +130,25 @@ function Run() {
     	var outputHTML = "<br>" + profile.year();
         document.getElementById("output").innerHTML = outputHTML;
     }
-
-    
+    if ( selectorView.value == "hourOfDayAvgValueInMonth" ) {
+        var outputHTML = "<br>";
+        for(var hour=1;hour<=24;hour++){
+            outputHTML += profile.hourOfDayAvgValueInMonth(hour,1,constants) + "<br>";
+        }
+        document.getElementById("output").innerHTML = outputHTML;
+    }
+    if ( selectorView.value == "hourOfDayMaxValueInMonth" ) {
+        var outputHTML = "<br>";
+        for(var hour=1;hour<=24;hour++){
+            outputHTML += profile.hourOfDayMaxValueInMonth(hour,1,constants) + "<br>";
+        }
+        document.getElementById("output").innerHTML = outputHTML;
+    }
+    if ( selectorView.value == "hourOfDayMinValueInMonth" ) {
+        var outputHTML = "<br>";
+        for(var hour=1;hour<=24;hour++){
+            outputHTML += profile.hourOfDayMinValueInMonth(hour,1,constants) + "<br>";
+        }
+        document.getElementById("output").innerHTML = outputHTML;
+    }  
 }
