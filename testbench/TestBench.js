@@ -30,12 +30,12 @@ function BuildingDataPrinter(building, outputTarget) {
 	}
 }
 
-function BuildingDataSraper(building) {
+function PropertySraper(building) {
 	var key;
 	var element;
 	var elementValue;
 	for ( key in building ) {
-		if ( building.hasOwnProperty(key) ) {
+		if ( building.hasOwnProperty(key) && document.getElementById(key)) {
 			element = document.getElementById(key);
 			switch ( element.value ) {
 				case "true":
@@ -52,17 +52,22 @@ function BuildingDataSraper(building) {
 }
 
 function Initialize() {
-	building = new Building(); 		// global
-    constants = new Constants();	// global
-    BuildingDataPrinter(building, "buildingData");   
+	building = new Building(); 						// global
+    constants = new Constants();					// global
+    solarInstallation = new SolarInstallation(); 	// global
+    system = new System(); 							// global
+    system.building[0] = building;
+    system.solarInstallation[0] = solarInstallation;
+    BuildingDataPrinter(building, "buildingData");
+    document.getElementById("objectProperties").innerHTML = "Building";
 }
 
 
 function Update() {
-	BuildingDataSraper(building);
+	PropertySraper(building);
+	PropertySraper(solarInstallation);
 	document.getElementById("debug").innerHTML = "";
 	Run();
-	BuildingDataPrinter(building, "buildingData");
 }
 
 
@@ -76,13 +81,29 @@ function Run() {
     switch ( selectorProfile.value ) {
     	case "1":
     		profile = HotWaterHeatingEnergyProfile( building, constants);
+    		BuildingDataPrinter(building, "buildingData");
+    		document.getElementById("objectProperties").innerHTML = "Building";
     		break;
     	case "2":
     		profile = SpaceHeatingEnergyProfile( building, constants);
+    		BuildingDataPrinter(building, "buildingData");
+    		document.getElementById("objectProperties").innerHTML = "Building";
     		break;
     	case "3":
     		profile = ElectricityConsumptionProfile( building, constants);
+    		BuildingDataPrinter(building, "buildingData");
+    		document.getElementById("objectProperties").innerHTML = "Building";
     		break;
+		case "4":
+    		profile = SolarElectricityProductionProfile( solarInstallation, constants);
+    		BuildingDataPrinter(solarInstallation, "buildingData");
+    		document.getElementById("objectProperties").innerHTML = "Solar installation";
+    		break;
+    	case "5":
+    		profile = SystemElectricityBalance( system, constants);
+    		BuildingDataPrinter(system, "buildingData");
+    		document.getElementById("objectProperties").innerHTML = "System";
+    		break;	
     }
 
 

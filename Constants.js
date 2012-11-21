@@ -10,4 +10,5 @@ function Constants() {
 	this.referenceYearCalendar = new ReferenceYearCalendar();
 	this.domesticElectricityConsumptionWeekValues = domesticElectricityConsumptionWeekValues;
 	this.domesticElectricityConsumptionHourValues = domesticElectricityConsumptionHourValues;
+	this.vantaaReferenceYearTotalIrradiationOnHorizontalSurface = vantaaReferenceYearTotalIrradiationOnHorizontalSurface;
 }
