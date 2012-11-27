@@ -144,6 +144,17 @@ function Run() {
             BuildingDataPrinter(system, "buildingData");
             document.getElementById("objectProperties").innerHTML = "System";
             break;
+        case "14":
+            profile = new Profile();
+            profile.profile = vantaaReferenceYearOutsideTemperature;
+            BuildingDataPrinter(system, "buildingData");
+            document.getElementById("objectProperties").innerHTML = "Outside temperature data";
+            break;
+        case "15":
+            profile = SolarHeatingEnergyProductionProfile(solarInstallation, constants);
+            BuildingDataPrinter(solarInstallation, "buildingData");
+            document.getElementById("objectProperties").innerHTML = "Solar installation";
+            break;
     }
 
 
