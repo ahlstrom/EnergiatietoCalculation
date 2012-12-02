@@ -13,4 +13,10 @@ function Constants() {
 	this.domesticElectricityConsumptionHourValues = domesticElectricityConsumptionHourValues;
 	this.vantaaReferenceYearTotalIrradiationOnHorizontalSurface = vantaaReferenceYearTotalIrradiationOnHorizontalSurface;
 	this.vantaaReferenceYearOutsideTemperature =  vantaaReferenceYearOutsideTemperature;
+
+	this.ctokelvin = 273.15;
+
+	// bedrock properties
+	this.bedrockThermalConductivity = [2.8, 2.4, 2.4, 2.4, 2.2, 2.4, 2.4, 2.4, 2.4];
+	this.bedrockUndisturbedTemp = 5.6; // degrees celsius
 }

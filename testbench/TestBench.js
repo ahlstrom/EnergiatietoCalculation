@@ -30,7 +30,7 @@ function BuildingDataPrinter(building, outputTarget) {
 	}
 }
 
-function PropertySraper(building) {
+function PropertyScraper(building) {
 	var key;
 	var element;
 	var elementValue;
@@ -55,17 +55,20 @@ function Initialize() {
 	building = new Building(); 						// global
     constants = new Constants();					// global
     solarInstallation = new SolarInstallation(); 	// global
+    borehole = new Borehole();                      // global
     system = new System(); 							// global
     system.building[0] = building;
     system.solarInstallation[0] = solarInstallation;
+    system.borehole[0] = borehole;
     BuildingDataPrinter(building, "buildingData");
     document.getElementById("objectProperties").innerHTML = "Building";
 }
 
 
 function Update() {
-	PropertySraper(building);
-	PropertySraper(solarInstallation);
+	PropertyScraper(building);
+	PropertyScraper(solarInstallation);
+    PropertyScraper(borehole);
 	document.getElementById("debug").innerHTML = "";
 	Run();
 }
@@ -154,6 +157,21 @@ function Run() {
             profile = SolarHeatingEnergyProductionProfile(solarInstallation, constants);
             BuildingDataPrinter(solarInstallation, "buildingData");
             document.getElementById("objectProperties").innerHTML = "Solar installation";
+            break;
+        case "16":
+            profile = BoreholeSpaceHeatingEnergyProductionProfile(system,borehole,constants);
+            BuildingDataPrinter(borehole, "buildingData");
+            document.getElementById("objectProperties").innerHTML = "Borehole";
+            break;
+        case "17":
+            profile = BoreholeHotWaterHeatingEnergyProductionProfile(system,borehole,constants);
+            BuildingDataPrinter(borehole, "buildingData");
+            document.getElementById("objectProperties").innerHTML = "Borehole";
+            break;
+        case "18":
+            profile = BoreholeElectricityConsumptionProfile(system,borehole,constants);
+            BuildingDataPrinter(borehole, "buildingData");
+            document.getElementById("objectProperties").innerHTML = "Borehole";
             break;
     }
 

@@ -1,8 +1,8 @@
 function SystemElectricityBalance(system,constants) {
 	var hour;
 	var index;
-	systemProfile = new Profile();
-	individualProfile = new Profile();
+	var systemProfile = new Profile();
+	var individualProfile = new Profile();
 	for(hour=0;hour<8760;hour++) {
 		systemProfile.profile[hour] = 0.0;
 	}
@@ -16,6 +16,13 @@ function SystemElectricityBalance(system,constants) {
 		individualProfile = SolarElectricityProductionProfile(system.solarInstallation[index],constants);
 		for(hour=0;hour<8760;hour++) {
 			systemProfile.profile[hour] -= individualProfile.profile[hour];
+		}
+	}
+	SystemBoreholeLoadSharing(system,constants);
+	for(index=0;index<system.borehole.length;index++) {
+		individualProfile = BoreholeElectricityConsumptionProfile(system,system.borehole[index],constants);
+		for(hour=0;hour<8760;hour++) {
+			systemProfile.profile[hour] += individualProfile.profile[hour];
 		}
 	}
 	return systemProfile;
