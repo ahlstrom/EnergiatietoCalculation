@@ -12,7 +12,6 @@ function SystemSpaceHeatingEnergyBalance(system,constants) {
 			systemProfile.profile[hour] += individualProfile.profile[hour];
 		}
 	}
-	SystemBoreholeLoadSharing(system,constants);	
 	for(index=0;index<system.borehole.length;index++) {
 		individualProfile = BoreholeSpaceHeatingEnergyProductionProfile(system,system.borehole[index],constants);
 		for(hour=0;hour<8760;hour++) {

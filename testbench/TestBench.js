@@ -45,7 +45,11 @@ function PropertyScraper(building) {
 					building[key] = false; 
 					break;
 				default:
-					building[key] = element.value;
+                    if (isNaN(Number(element.value))) {
+					   building[key] = element.value;
+                    } else {
+                        building[key] = Number(element.value);
+                    }
 			}			
 		}
 	}
@@ -170,6 +174,21 @@ function Run() {
             break;
         case "18":
             profile = BoreholeElectricityConsumptionProfile(system,borehole,constants);
+            BuildingDataPrinter(borehole, "buildingData");
+            document.getElementById("objectProperties").innerHTML = "Borehole";
+            break;
+        case "19":
+            profile = BoreholeTemperatureOutProfile(system,borehole,constants);
+            BuildingDataPrinter(borehole, "buildingData");
+            document.getElementById("objectProperties").innerHTML = "Borehole";
+            break;
+        case "20":
+            profile = BoreholeSpaceHeatingCopProfile(system,borehole,constants);
+            BuildingDataPrinter(borehole, "buildingData");
+            document.getElementById("objectProperties").innerHTML = "Borehole";
+            break; 
+        case "21":
+            profile = BoreholeWaterHeatingCopProfile(system,borehole,constants);
             BuildingDataPrinter(borehole, "buildingData");
             document.getElementById("objectProperties").innerHTML = "Borehole";
             break;

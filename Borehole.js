@@ -18,13 +18,15 @@ function Borehole() {
 	this.diameter							= 0.13;				// meters
 	this.wallTemp							= 0.5;				// degrees celsius
 	this.tGroundLoop						= -5;				// degrees celsius
-	this.tOutSpace							= 40;				// degrees celsius
 	this.tOutSpaceMax						= 45;				// degrees celsius
 	this.tOutSpaceMaxAt						= -30;				// degrees celsius
 	this.tOutSpaceMin						= 20;				// degrees celsius
 	this.tOutSpaceMinAt						= 20;				// degrees celsius
 	this.tOutHotWater						= 55;				// degrees celsius
-	this.effeciencyFactor					= 0.5;				// Adjusting theoretical Carno't process to reality
+	this.tDiffCondenser						= 10;
+	this.tDiffEvaporator					= 5;
+	this.efficiencyFactor					= 0.5;				// Adjusting theoretical Carno't process to reality
+
 
 	// Dimensioning values based on system energy demand
 	this.loadShare;
