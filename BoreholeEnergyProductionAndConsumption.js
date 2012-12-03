@@ -145,9 +145,13 @@ function SystemBoreholeLoadSharing (system,constants) {
 function BoreholeCapacityContinuous(borehole,constants) {
 	var capacity;
 	var thermalConductivity = constants.bedrockThermalConductivity[borehole.bedrockTypeId];
-	capacity = 2 * Math.PI * thermalConductivity * (constants.bedrockUndisturbedTemp - borehole.wallTemp);
-	capacity /= Math.log(borehole.activeDepth / borehole.diameter);
-	capacity /= 1000;
+	if(borehole.activeDepth > 60) {
+		capacity = 2 * Math.PI * thermalConductivity * (constants.bedrockUndisturbedTemp - borehole.wallTemp);
+		capacity /= Math.log(borehole.activeDepth / borehole.diameter);
+		capacity /= 1000;
+	} else {
+		capacity = 0;
+	}
 	return capacity;
 }
 
