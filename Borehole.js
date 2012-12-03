@@ -23,10 +23,9 @@ function Borehole() {
 	this.tOutSpaceMin						= 20;				// degrees celsius
 	this.tOutSpaceMinAt						= 20;				// degrees celsius
 	this.tOutHotWater						= 55;				// degrees celsius
-	this.tDiffCondenser						= 10;
-	this.tDiffEvaporator					= 5;
+	this.tDiffCondenser						= 10;				// degrees celsius
+	this.tDiffEvaporator					= 5;				// degrees celsius
 	this.efficiencyFactor					= 0.5;				// Adjusting theoretical Carno't process to reality
-
 
 	// Dimensioning values based on system energy demand
 	this.loadShare;

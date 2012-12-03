@@ -21,14 +21,12 @@ function SystemHotWaterHeatingEnergyBalance(system,constants) {
 			systemConsumptionProfile.profile[hour] += elementProfile.profile[hour];
 		}
 	}
-	/*
 	for(index=0;index<system.solarInstallation.length;index++) {
 		elementProfile = SolarHeatingEnergyProductionProfile(system.solarInstallation[index],constants);
 		for(hour=0;hour<8760;hour++) {
 			systemProductionProfile.profile[hour] += elementProfile.profile[hour];
 		}
 	}
-	*/
 	SystemBoreholeLoadSharing(system,constants);
 	for(index=0;index<system.borehole.length;index++) {
 		elementProfile = BoreholeHotWaterHeatingEnergyProductionProfile(system,system.borehole[index],constants);
