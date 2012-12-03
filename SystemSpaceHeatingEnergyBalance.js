@@ -9,13 +9,17 @@ function SystemSpaceHeatingEnergyBalance(system,constants) {
 	for(index=0;index<system.building.length;index++) {
 		individualProfile = SpaceHeatingEnergyProfile(system.building[index],constants);
 		for(hour=0;hour<8760;hour++) {
-			systemProfile.profile[hour] += individualProfile.profile[hour];
+			if( !(isNaN(individualProfile.profile[hour])) ) {
+				systemProfile.profile[hour] += individualProfile.profile[hour];
+			}			
 		}
 	}
 	for(index=0;index<system.borehole.length;index++) {
 		individualProfile = BoreholeSpaceHeatingEnergyProductionProfile(system,system.borehole[index],constants);
 		for(hour=0;hour<8760;hour++) {
-			systemProfile.profile[hour] -= individualProfile.profile[hour];
+			if( !(isNaN(individualProfile.profile[hour])) ) {
+				systemProfile.profile[hour] -= individualProfile.profile[hour];
+			}
 		}
 	}
 	return systemProfile;
