@@ -63,12 +63,14 @@ function BoreholeElectricityConsumptionProfile(system,borehole,constants) {
 	var systemHeatingEnergyConsumption = new Profile();
 	var systemSpaceHeatingEnergyConsumption = SystemSpaceHeatingEnergyConsumption(system,constants);
 	var systemHotWaterHeatingEnergyConsumption = SystemHotWaterHeatingEnergyDemandAfterSolar(system,constants);
-
+/*
 	var tGroundLoopK = constants.ctokelvin + borehole.tGroundLoop;		// Kelvin	
 	var tOutHotWaterK = constants.ctokelvin + borehole.tOutHotWater; 	// Kelvin
 	var tOutSpaceK;														// Kelvin
 	var copSpace;
 	var copHotWater;
+*/
+	var cop;
 
 	var space;
 	var hotWater;
@@ -91,6 +93,7 @@ function BoreholeElectricityConsumptionProfile(system,borehole,constants) {
 			hotWater = (borehole.maxOutPower / (borehole.loadshare * systemHeatingEnergyConsumption.profile[hour])) * systemHotWaterHeatingEnergyConsumption.profile[hour];
 		}
 
+/*
 		if (constants.vantaaReferenceYearOutsideTemperature[hour] > borehole.tOutSpaceMinAt) {
 			tOutSpaceK = constants.ctokelvin + borehole.tOutSpaceMin;
 		} else if (constants.vantaaReferenceYearOutsideTemperature[hour] < borehole.tOutSpaceMaxAt) {
@@ -103,8 +106,11 @@ function BoreholeElectricityConsumptionProfile(system,borehole,constants) {
 		}
 		copSpace = borehole.efficiencyFactor * (tOutSpaceK + borehole.tDiffCondenser) / ((tOutSpaceK + borehole.tDiffCondenser) - (tGroundLoopK - borehole.tDiffEvaporator));
 		copHotWater = borehole.efficiencyFactor * (tOutHotWaterK + borehole.tDiffCondenser) / ((tOutHotWaterK + borehole.tDiffCondenser) - (tGroundLoopK - borehole.tDiffEvaporator));
+*/
 
-		profile.profile[hour] = space / copSpace + hotWater / copHotWater;
+		cop = copHour(constants, borehole, hour);
+
+		profile.profile[hour] = space / cop.space + hotWater / cop.hotWater;
 
 	}
 
@@ -112,7 +118,40 @@ function BoreholeElectricityConsumptionProfile(system,borehole,constants) {
 }
 
 
+function copHour (constants, borehole, hour) {
+
+	var tGroundLoopK = constants.ctokelvin + borehole.tGroundLoop;		// Kelvin	
+	var tOutHotWaterK = constants.ctokelvin + borehole.tOutHotWater; 	// Kelvin
+	var tOutSpaceK;														// Kelvin
+	var copSpace;
+	var copHotWater;
+
+	if (constants.vantaaReferenceYearOutsideTemperature[hour] > borehole.tOutSpaceMinAt) {
+		tOutSpaceK = constants.ctokelvin + borehole.tOutSpaceMin;
+	} else if (constants.vantaaReferenceYearOutsideTemperature[hour] < borehole.tOutSpaceMaxAt) {
+		tOutSpaceK = constants.ctokelvin + borehole.tOutSpaceMax;
+	} else {
+		tOutSpaceK = (borehole.tOutSpaceMax - borehole.tOutSpaceMin) / (borehole.tOutSpaceMaxAt - borehole.tOutSpaceMinAt);
+		tOutSpaceK *= (constants.vantaaReferenceYearOutsideTemperature[hour] - borehole.tOutSpaceMinAt);
+		tOutSpaceK += borehole.tOutSpaceMin;
+		tOutSpaceK += constants.ctokelvin;
+	}
+
+	copSpace = borehole.efficiencyFactor * (tOutSpaceK + borehole.tDiffCondenser) / ((tOutSpaceK + borehole.tDiffCondenser) - (tGroundLoopK - borehole.tDiffEvaporator));
+	copHotWater = borehole.efficiencyFactor * (tOutHotWaterK + borehole.tDiffCondenser) / ((tOutHotWaterK + borehole.tDiffCondenser) - (tGroundLoopK - borehole.tDiffEvaporator));
+
+	return {
+		space 	 : copSpace,
+		hotWater : copHotWater
+	}
+
+}
+
+
 function SystemBoreholeLoadSharing (system,constants) {
+
+	var hour;
+	var cop;
 
 	var systemProductionCapacityYear = 0.0;
 
@@ -121,7 +160,8 @@ function SystemBoreholeLoadSharing (system,constants) {
 	var systemHotWaterHeatingEnergyConsumption = SystemHotWaterHeatingEnergyDemandAfterSolar(system,constants);
 
 	for(index=0;index<system.borehole.length;index++) {
-		systemProductionCapacityYear += system.borehole[index].activeDepth * BoreholeCapacityContinuous(system.borehole[index],constants) * 8760;
+		//systemProductionCapacityYear += system.borehole[index].activeDepth * BoreholeCapacityContinuous(system.borehole[index],constants) * 8760;
+		systemProductionCapacityYear += BoreholeProductionCapacityYear(system, system.borehole[index], constants);
 	}
 
 	for(hour=0;hour<8760;hour++) {
@@ -130,15 +170,36 @@ function SystemBoreholeLoadSharing (system,constants) {
 
 	if(systemProductionCapacityYear <= systemHeatingEnergyConsumption.year()) {
 		for(index=0;index<system.borehole.length;index++) {
-			system.borehole[index].loadShare = system.borehole[index].activeDepth * BoreholeCapacityContinuous(system.borehole[index],constants) * 8760 / systemHeatingEnergyConsumption.year();
+			//system.borehole[index].loadShare = system.borehole[index].activeDepth * BoreholeCapacityContinuous(system.borehole[index],constants) * 8760 / systemHeatingEnergyConsumption.year();
+			system.borehole[index].loadShare = BoreholeProductionCapacityYear (system, system.borehole[index], constants) / systemHeatingEnergyConsumption.year();
 			system.borehole[index].maxOutPower = (system.borehole[index].powerDimensioning / 100) * system.borehole[index].loadShare * systemHeatingEnergyConsumption.yearMax();
 		}
 	} else {
 		for(index=0;index<system.borehole.length;index++) {
-			system.borehole[index].loadShare = system.borehole[index].activeDepth * BoreholeCapacityContinuous(system.borehole[index],constants) * 8760 / systemProductionCapacityYear;
+			//system.borehole[index].loadShare = system.borehole[index].activeDepth * BoreholeCapacityContinuous(system.borehole[index],constants) * 8760 / systemProductionCapacityYear;
+			system.borehole[index].loadShare = BoreholeProductionCapacityYear (system, system.borehole[index], constants)/ systemProductionCapacityYear;
 			system.borehole[index].maxOutPower = (system.borehole[index].powerDimensioning / 100) * system.borehole[index].loadShare * systemHeatingEnergyConsumption.yearMax();
 		}
 	}
+
+}
+
+function BoreholeProductionCapacityYear(system, borehole, constants) {
+
+	var hour;
+	var cop;
+	var productionCapacityYear = 0.0;
+
+	for(hour=0;hour<8760;hour++) {
+
+		cop = copHour(constants, borehole, hour);
+
+		productionCapacityYear += ( borehole.activeDepth * BoreholeCapacityContinuous(borehole,constants) ) / ( 1 - (1 / cop.space) );
+
+	}
+
+	return productionCapacityYear
+
 }
 
 

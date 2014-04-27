@@ -18,7 +18,7 @@ function SolarInstallation() {
 
 	// Thermal collector specific values
 	this.IAM 		= 0.94;
-	this.a1 		= 2; // W/m2K
+	this.a1 		= 3; // W/m2K
 	this.a2 		= 0;
 	this.nkierto 	= 0.8;
 	this.no 		= 0.83;
